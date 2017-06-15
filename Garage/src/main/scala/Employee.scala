@@ -8,7 +8,6 @@ class Employee(ID: Int, name: String, var job: String) extends Person(ID, name) 
   def setStatus(newStatus: Boolean): Unit = {busy = newStatus}
   def getJob(): String = {job}
   def setJob(newJob: String): Unit = {job = newJob}
-  //def setJob(): String = {job}
 
   def doWork(): Unit = {
     busy = true

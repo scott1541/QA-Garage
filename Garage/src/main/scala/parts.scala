@@ -1,4 +1,6 @@
 
-class parts {
+abstract class parts {
+
+
 
 }

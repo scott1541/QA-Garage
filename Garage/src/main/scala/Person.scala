@@ -5,11 +5,5 @@ abstract class Person(var perID: Int, val name: String){
   def getperID(): Int = {perID}
   def getName(): String = {name}
 
-  /*
-  var name
-  var contactNum
-  var address
-  var wallet
 
-*/
 }

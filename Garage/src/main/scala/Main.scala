@@ -30,7 +30,7 @@ object Main {
     val car8 = new Car(2, "P9 OLL ", cust2)
     val car9 = new Bike(3, "DN63 OUF", cust5)
     val car10= new Car(4, "FH07 UDD", cust4)
-    val car11 = new Car(5, "V622 KOH", cust4)
+    val car11 = new Car(5, "V623 KOH", cust4)
     val car12 = new Bike(6, "H246 AMD", cust3)
 
 
