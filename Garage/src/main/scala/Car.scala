@@ -1,6 +1,4 @@
-/**
-  * Created by Administrator on 13/06/2017.
-  */
-class Car(ID: Int, owner: Customer) extends Vehicle(ID, owner) {
+
+class Car(ID: Int, vehicleReg: String, owner: Customer) extends Vehicle(ID, vehicleReg, owner) {
   //car stuff
 }

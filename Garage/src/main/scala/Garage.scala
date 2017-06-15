@@ -1,8 +1,6 @@
 import scala.collection.mutable.ListBuffer
 
-/**
-  * Created by Administrator on 13/06/2017.
-  */
+
 class Garage {
 
   var garageOpen = false
@@ -12,51 +10,92 @@ class Garage {
   var availableMechanics = ListBuffer[Employee]()
   var peopleInGarage = ListBuffer[Person]()
 
-  //def addCustomer() = {}
 
   def openGarage(): Unit = {
     garageOpen = true
-    //peopleInGarage = employeeList
+
+   employeeList.foreach(item => if(item.getJob() != null) {
+      peopleInGarage += item } )
   }
 
   def closeGarage(): Unit = {
     garageOpen = false
+    peopleInGarage.foreach(item => {peopleInGarage -= item } )
+  }
+
+  def getAvailableMech(): Unit = {
+    availableMechanics.clear()
+    employeeList.foreach(item => if(item.getJob() == "Mechanic" && item.getStatus() == false ) {
+      availableMechanics += item })
   }
 
   def startWork(): Unit = {
 
+    workOnVehicle()
   }
 
   def addEmployee(newEm: Employee): Unit = {
     employeeList += newEm
   }
 
-  //def remEmployee() = {}
-
   def addVehicle(addVeh: Vehicle): Unit = {
-
     vehicleList += addVeh
-
   }
+
   def remVehicle(ID: Int): Unit = {
     vehicleList.foreach(item => if(item.getVID() == ID) {
-      vehicleList -= item
-    })
+      vehicleList -= item } )
   }
-  //Overload for rem by type
-  //def remVehicle
+
+  def remVehicle(Reg: String): Unit = {
+    vehicleList.foreach(item => if(item.getReg() == Reg) {
+      vehicleList -= item } )
+  }
+
+  def remVehicle(owner: Customer): Unit = {
+    vehicleList.foreach(item => if(item.getOwner() == owner) {
+      vehicleList -= item } )
+  }
 
   def workOnVehicle(): Unit = {
+    //if Employee[id
+    getAvailableMech()
 
-    //availableMechanics += employeeList.foreach(item => item.busy == false)
-    //var availableMechnics = employeeList.foreach
     while(vehicleList.nonEmpty && availableMechanics.nonEmpty)
+      {
+        println("Mechanic " + availableMechanics.head.getName() + " is working on vehicle: " + vehicleList.head.getReg())
+        //Thread.sleep(250)
+        availableMechanics.head.doWork()
+
+        if(availableMechanics.tail.isEmpty)
+          {
+            employeeList.foreach(item => if(item.getJob() == "Mechanic"){
+              item.setStatus(false)
+            })
+          }
+        getAvailableMech()
+
+        println("Vehicle: " + vehicleList.head.getReg() + " is fixed. ")
+        vehicleList.head.getOwner().payGarage(100) //Each fix costs £100  #bestgarageever
+        println(vehicleList.head.getOwner().name + " now owes the garage: £" + vehicleList.head.getOwner().owes)
+
+        vehicleList -= vehicleList.head
+      }
+
+
+    if(availableMechanics.nonEmpty)
+      println("All vehicles fixed!")
+    else
+      println("No available mechanics, vehicles not fixed!")
+
+    closeGarage()
   }
 
   def contOfGarage(): Unit = {
-    println("Contents of Garage: \n")
-    println("People: " + peopleInGarage.foreach(item => println(item)))
-    println("Vehicles: " + vehicleList.foreach(item => println(item)))
+    println("Contents of Garage: ")
+    println("People: ")
+    println(peopleInGarage.foreach(item => print(item.name + " ")))
+    println(vehicleList.foreach(item => println("Vehicle: " + item.vehicleReg)))
   }
 
   //Debug/Testing methods
